@@ -32,8 +32,7 @@ module.exports.getPopulationByState = (state) => {
     //looping to find if state data matches state then look for population and add that pop to population varialbe for printing
     for(let index = 0; index < data.length; index++){
         if(data[index].state === state){
-            population += data[index].pop;
-            
+            population += data[index].pop;   
         }
     }
     //does not work above for loop. This is the format for printing
@@ -56,8 +55,8 @@ console.log(module.exports.lookupByCityState("BOSTON", "TX"));
 console.log("Look up by state (MA)");
 console.log(module.exports.getPopulationByState('MA'));
 
-console.log("Look up by city (TX)");
+console.log("Look up by state (TX)");
 console.log(module.exports.getPopulationByState('TX'));
 
-console.log("Look up by city (AA)");
+console.log("Look up by state (AA)");
 console.log(module.exports.getPopulationByState('AA'));
