@@ -20,7 +20,7 @@ module.exports.lookupByCityState = (city, state) => {
 
 module.exports.getPopulationByState = (state) => {
     let population = data.reduce((total,current) => {
-        //checking if current item is the same as the state. If so, add that current idem to total
+        //checking if current item is the same as the state. If so, add that current item to total
         if(current.state === state) {
             total += current.pop;
         }
@@ -30,23 +30,23 @@ module.exports.getPopulationByState = (state) => {
 };
 
 
-console.log("Look up zip code (02215)");
+console.log("\nLook up zip code (02215)");
 console.log(module.exports.lookupByZipCode('02215'));
 
-console.log("Look up zip code (99999)");
+console.log("\nLook up zip code (99999)");
 console.log(module.exports.lookupByZipCode('99999'));
 
-console.log("Look up by city and state (BOSTON, MA)");
+console.log("\nLook up by city and state (BOSTON, MA)");
 console.log(module.exports.lookupByCityState("BOSTON", "MA"));
 
-console.log("Look up by city and state (BOSTON, TX)");
+console.log("\nLook up by city and state (BOSTON, TX)");
 console.log(module.exports.lookupByCityState("BOSTON", "TX"));
 
-console.log("Look up by state (MA)");
+console.log("\nLook up by state (MA)");
 console.log(module.exports.getPopulationByState('MA'));
 
-console.log("Look up by state (TX)");
+console.log("\nLook up by state (TX)");
 console.log(module.exports.getPopulationByState('TX'));
 
-console.log("Look up by state (AA)");
+console.log("\nLook up by state (AA)");
 console.log(module.exports.getPopulationByState('AA'));

@@ -40,23 +40,23 @@ module.exports.getPopulationByState = (state) => {
     return results	
 };
 
-console.log("Look up zip code (02215)");
+console.log("\nLook up zip code (02215)");
 console.log(module.exports.lookupByZipCode('02215'));
 
-console.log("Look up zip code (99999)");
+console.log("\nLook up zip code (99999)");
 console.log(module.exports.lookupByZipCode('99999'));
 
-console.log("Look up by city (BOSTON, MA)");
+console.log("\nLook up by city (BOSTON, MA)");
 console.log(module.exports.lookupByCityState("BOSTON", "MA"));
 
-console.log("Look up by city (BOSTON, TX)");
+console.log("\nLook up by city (BOSTON, TX)");
 console.log(module.exports.lookupByCityState("BOSTON", "TX"));
 
-console.log("Look up by state (MA)");
+console.log("\nLook up by state (MA)");
 console.log(module.exports.getPopulationByState('MA'));
 
-console.log("Look up by state (TX)");
+console.log("\nLook up by state (TX)");
 console.log(module.exports.getPopulationByState('TX'));
 
-console.log("Look up by state (AA)");
+console.log("\nLook up by state (AA)");
 console.log(module.exports.getPopulationByState('AA'));
