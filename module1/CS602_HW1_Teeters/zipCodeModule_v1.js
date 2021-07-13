@@ -40,6 +40,7 @@ module.exports.getPopulationByState = (state) => {
     return results	
 };
 
+/*
 console.log("\nLook up zip code (02215)");
 console.log(module.exports.lookupByZipCode('02215'));
 
@@ -60,3 +61,4 @@ console.log(module.exports.getPopulationByState('TX'));
 
 console.log("\nLook up by state (AA)");
 console.log(module.exports.getPopulationByState('AA'));
+*/
