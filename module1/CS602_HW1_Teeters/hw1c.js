@@ -14,13 +14,13 @@ cities.on('lookupByCityState', (output) => {
 
 //event handler2
 cities.on('lookupByCityState', (output) => {
-    console.log(colors.blue('\nEvent lookupByCityState raised! (Handler2)\n'));
+    console.log(colors.blue('\nEvent lookupByCityState raised! (Handler2)'));
     //printing city and state
     console.log(`City: ${output.city}, State: ${output.state}`)
     //looping through again in order to restructure the output
     //exclusively looping through the output that was emmited from original function in zipCodeEmmitter.js
     for (let i = 0; i < output.data.length; i++) {
-        console.log(`${output.data[i].zip} has a pop of ${output.data[i].pop}`)
+        console.log(`  ${output.data[i].zip} has a pop of ${output.data[i].pop}`)
     }
 });
 
@@ -33,7 +33,6 @@ cities.lookupByZipCode('02215');
 
 console.log("\nLookupByCityState (BOSTON,MA)".green);
 cities.lookupByCityState("BOSTON", "MA");
-
 
 console.log("\ngetPopulationByState (MA)".green);
 cities.getPopulationByState('MA');
