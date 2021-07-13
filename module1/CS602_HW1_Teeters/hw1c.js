@@ -15,7 +15,7 @@ cities.on('lookupByCityState', (output) => {
 //event handler2
 cities.on('lookupByCityState', (output) => {
     console.log(colors.blue('\nEvent lookupByCityState raised! (Handler2)\n'));
-    //printing city and state as an object
+    //printing city and state
     console.log(`City: ${output.city}, State: ${output.state}`)
     //looping through again in order to restructure the output
     //exclusively looping through the output that was emmited from original function in zipCodeEmmitter.js
