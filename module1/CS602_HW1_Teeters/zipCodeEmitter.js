@@ -16,14 +16,15 @@ class ZipCodeEmitter  extends EventEmitter {
 
 	lookupByCityState(city, state)  {
 		const newData = []
-    	let results = {'city': city, 'state': state, 'data': newData};
+    	let output = {'city': city, 'state': state, 'data': newData};
     	for(let index = 0; index < data.length; index++){
         	if((data[index].city === city) && (data[index].state === state)){
             newData.push({'zip': data[index]._id, 'pop': data[index].pop}	)
         	}
     	}	 
-    	this.emit('lookupByCityState', results) ;	
+    	this.emit('lookupByCityState', output) ;	
 	}
+
 
 	getPopulationByState(state) {
 		let population = 0;
