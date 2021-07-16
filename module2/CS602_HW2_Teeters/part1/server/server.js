@@ -16,13 +16,24 @@ const server = net.createServer((socket) => {
 	
 	socket.on('data', (data) => {
 
-		let input = data.toString();
+		let input = data.toString('utf8').split(",");
 		console.log(colors.blue('...Received %s'), input);
 
 		// Fill in the rest
+		if (input[0] === 'lookupByZipCode'){
+			let zipcode = cities.lookupByZipCode(input[1]);
+			socket.write(JSON.stringify(zipcode));
+		} 
 
+		if (input[0] === 'lookupByCityState') {
+			let cityState = cities.lookupByCityState(input[1],input[2]);
+			socket.write(JSON.stringify(cityState));
+		}
 
-		
+		if (input[0] === 'getPopulationByState') {
+			let popState = cities.getPopulationByState(input[1]);
+			socket.write(JSON.stringify(popState));
+		}
 	});
 
 });

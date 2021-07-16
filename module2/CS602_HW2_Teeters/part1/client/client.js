@@ -33,6 +33,10 @@ client.on('end', () => {
 
 
 // HW Code - Write code below for 'data' event listener
+client.on('data', (testing) => {
+	console.log(testing.toString('utf8'));
+	return;
+});
 
 
 
