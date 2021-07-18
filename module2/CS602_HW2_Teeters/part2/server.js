@@ -23,15 +23,14 @@ const cities = require('./zipCodeModule_v2');
 
 app.get('/',  (req, res) => {
 	//res.render('homeView');
-	let replacement = {message: "Welcome to CS602 Week 2 homework assignment"};
-	res.render('homeView', replacement);
+	let welcome = {message: "Welcome to CS602 Week 2 homework assignment"};
+	res.render('homeView', welcome);
 });
 
 app.get('/zip', (req, res) => {
 	const id = req.query.id;
 	if(id) {
 		const results = cities.lookupByZipCode(id);
-		//we want to render the page look up zipView with the results
 		const replacement = {zipVariable: results.city}
 		return res.render('lookupByZipView', replacement);
 	}
@@ -62,25 +61,26 @@ app.get('/zip/:id', (req, res) => {
 
 app.get('/city', (req, res) => {
 	const city = req.query.city;
-	if(city) {
-		const results = cities.lookupByCityState(city);
-		const replacement = {cityVariable: results.city}
+	const state = req.query.state;
+	if(city && state) {
+		const results = cities.lookupByCityState(city,state);
+		const replacement = {cityVariable: results.city,
+			stateVarialbe: results.state};
 		return res.render('lookupByCityStateView', replacement);
-	}
+	};
 	res.render('lookupByCityStateForm');
-
 });
 
 app.post('/city', (req, res) => {
 	const city = req.body.city;
-	const results = cities.lookupByCityState(city);
+	const state = req.body.state;
+	const results = cities.lookupByCityState(city,state);
 	const replacement = {
 		cityVariable: results.city,
-		//stateVariable: results.state,
+		stateVariable: results.state,
 		zip: results._id,
 		population: results.pop};
 		return res.render('lookupByCityStateView', replacement);
-
 });
 
 // Implement the JSON, XML, & HTML formats
@@ -94,7 +94,14 @@ app.get('/city/:city/state/:state', (req, res) => {
 
 
 app.get('/pop', (req, res) => {
-	
+	const population = req.query.population;
+	if (population){
+		const results = cities.getPopulationByState(population);
+		const replacement = {popVariable: results.pop};
+		res.render('populationView', replacement);
+
+	}
+	res.render('populationForm',);
 	
 });
 
