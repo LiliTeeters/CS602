@@ -15,7 +15,7 @@ const server = net.createServer((socket) => {
 	// HW Code - Write the following code to process data from client
 	
 	socket.on('data', (data) => {
-
+		//convertind data to a string and spliting data at the comma
 		let input = data.toString('utf8').split(",");
 		console.log(colors.blue('...Received %s'), input);
 
