@@ -5,7 +5,6 @@
     <th>ZipCode</th><th>Population</th>
     {{#each data}} 
         <tr>
-            {{!creathing link to take from zip to population by state page}}
             <td><a href="/pop/{{state}}">{{this.zip}}</a></td>
             <td align="right">{{this.pop}}</td>  
         </tr>

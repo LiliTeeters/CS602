@@ -11,11 +11,13 @@ let model = null;
 let Schema = mongoose.Schema;
 
 // Step 1. Fill in the schema definition
+mongoose.Promise = global.Promise;
 
 // Step 2. For collection, replace lastName below with your lastName 
 
 let employeeSchema = new Schema({
-	
+	firstName: String,
+	lastName: String,
 	
 
 }, {
