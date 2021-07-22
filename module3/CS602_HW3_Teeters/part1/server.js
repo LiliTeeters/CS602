@@ -77,27 +77,94 @@ app.get('/zip/:id', async function(req, res) {
 // Complete the code for the following
 
 app.get('/city', async function(req, res){
-	
-	
+	let city = req.query.city;
+	let state = req.query.state;
+	if(city && state) {
+		let results = await cities.lookupByCityState(city,state);
+		res.render('lookupByCityStateView', {cityVariable: results.city,
+			stateVariable: results.state,
+			data: results.data});
+	} else {
+		res.render('lookupByCityStateForm');
+	}		
 });
 
-app.post('/city', async function(req, res){
-	
 
+app.post('/city', async function(req, res){
+	let city = req.body.city;
+	let state = req.body.state;
+	let results = await cities.lookupByCityState(city,state);
+		res.render('lookupByCityStateView', {cityVariable: results.city,
+			stateVariable: results.state,
+			data: results.data});
 });
 
 app.get('/city/:city/state/:state', async function(req, res) {
-	
+	const city = req.params.city;
+	const state = req.params.state;
+	const results = await cities.lookupByCityState(city,state);
 
+	res.format ({
+		'application/json': function() {
+			res.json(results)
+		},
+
+		'application/xml': function() {
+			'<?xml version="1.0"?>\n' +
+						'<zipCode id="' + results._id + '">\n' + 
+						'   <city>' + results.city + '</city>\n' + 
+						'   <state>' + results.state + '</state>\n' + 	
+						'   <pop>' + results.pop + '</pop>\n' + 				 
+						'</zipCode>\n';
+					
+			
+			res.type('application/xml');
+			res.send(resultXml);
+		},
+
+		'text/html': function() {
+			res.render('lookupByCityStateView', results);
+		}
+	});
 });
 
 app.get('/pop', async function(req, res) {
-	
+	let state = req.query.state;
+	if (state){
+		let results = await cities.getPopulationByState(state);
+		res.render('populationView', {state: results.state, population: results.pop});
+	}else{
+		res.render('populationForm');
+	}
 	
 });
 
 app.get('/pop/:state', async function(req, res) {
-	
+	let state = req.params.state;
+	const results = await cities.getPopulationByState(state);
+
+	res.format ({
+		'application/json': function() {
+			res.json(results)
+		},
+
+		'application/xml': function() {
+			'<?xml version="1.0"?>\n' +
+						'<zipCode id="' + results._id + '">\n' + 
+						'   <city>' + results.city + '</city>\n' + 
+						'   <state>' + results.state + '</state>\n' + 	
+						'   <pop>' + results.pop + '</pop>\n' + 				 
+						'</zipCode>\n';
+					
+			
+			res.type('application/xml');
+			res.send(resultXml);
+		},
+
+		'text/html': function() {
+			res.render('lookupByCityStateView', results);
+		}
+	});
 
 });
 
