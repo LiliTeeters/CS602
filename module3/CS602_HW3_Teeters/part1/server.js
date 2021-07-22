@@ -81,6 +81,7 @@ app.get('/city', async function(req, res){
 	let state = req.query.state;
 	if(city && state) {
 		let results = await cities.lookupByCityState(city,state);
+		console.log(results);
 		res.render('lookupByCityStateView', {cityVariable: results.city,
 			stateVariable: results.state,
 			data: results.data});
@@ -103,7 +104,10 @@ app.get('/city/:city/state/:state', async function(req, res) {
 	const city = req.params.city;
 	const state = req.params.state;
 	const results = await cities.lookupByCityState(city,state);
-
+	res.render('lookupByCityStateView', {cityVariable: results.city,
+		stateVariable: results.state,
+		data: results.data});
+/*
 	res.format ({
 		'application/json': function() {
 			res.json(results)
@@ -125,7 +129,7 @@ app.get('/city/:city/state/:state', async function(req, res) {
 		'text/html': function() {
 			res.render('lookupByCityStateView', results);
 		}
-	});
+	});*/
 });
 
 app.get('/pop', async function(req, res) {
@@ -142,7 +146,8 @@ app.get('/pop', async function(req, res) {
 app.get('/pop/:state', async function(req, res) {
 	let state = req.params.state;
 	const results = await cities.getPopulationByState(state);
-
+	res.render('populationView', {state: results.state, population: results.pop});
+/*
 	res.format ({
 		'application/json': function() {
 			res.json(results)
@@ -164,7 +169,7 @@ app.get('/pop/:state', async function(req, res) {
 		'text/html': function() {
 			res.render('lookupByCityStateView', results);
 		}
-	});
+	});*/
 
 });
 
