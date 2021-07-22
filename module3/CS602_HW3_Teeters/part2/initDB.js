@@ -31,7 +31,6 @@ const Employee = EmployeeDB.getModel();
 
 	process.exit();
 
-
 })();
 
 

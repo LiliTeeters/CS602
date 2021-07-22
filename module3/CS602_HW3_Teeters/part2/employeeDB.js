@@ -18,10 +18,8 @@ mongoose.Promise = global.Promise;
 let employeeSchema = new Schema({
 	firstName: String,
 	lastName: String,
-	
-
 }, {
-	collection: 'employees_lastName'
+	collection: 'employees_teeters'
 });
 
 module.exports = {	
