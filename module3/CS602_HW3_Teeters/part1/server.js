@@ -112,7 +112,6 @@ app.get('/city/:city/state/:state', async function(req, res) {
 		'application/json': function() {
 			res.json(results)
 		},
-
 		'application/xml': function() {
 			'<?xml version="1.0"?>\n' +
 						'<zipCode id="' + results._id + '">\n' + 
@@ -121,7 +120,6 @@ app.get('/city/:city/state/:state', async function(req, res) {
 						'   <pop>' + results.pop + '</pop>\n' + 				 
 						'</zipCode>\n';
 					
-			
 			res.type('application/xml');
 			res.send(resultXml);
 		},
@@ -147,29 +145,6 @@ app.get('/pop/:state', async function(req, res) {
 	let state = req.params.state;
 	const results = await cities.getPopulationByState(state);
 	res.render('populationView', {state: results.state, population: results.pop});
-/*
-	res.format ({
-		'application/json': function() {
-			res.json(results)
-		},
-
-		'application/xml': function() {
-			'<?xml version="1.0"?>\n' +
-						'<zipCode id="' + results._id + '">\n' + 
-						'   <city>' + results.city + '</city>\n' + 
-						'   <state>' + results.state + '</state>\n' + 	
-						'   <pop>' + results.pop + '</pop>\n' + 				 
-						'</zipCode>\n';
-					
-			
-			res.type('application/xml');
-			res.send(resultXml);
-		},
-
-		'text/html': function() {
-			res.render('lookupByCityStateView', results);
-		}
-	});*/
 
 });
 
