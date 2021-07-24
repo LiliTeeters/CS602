@@ -16,10 +16,9 @@ module.exports = async (req , res , next) => {
         
 
       }else{
-        res.render('deleteEmployeeView', {title: 'delete', data});
+        res.render('deleteEmployeeView', {title: 'Delete Employee?', data});
 
       }
-
     };
     
     

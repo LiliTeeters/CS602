@@ -12,7 +12,7 @@ module.exports = async (req , res , next) => {
         res.render('404');
     }else{
         res.render('editEmployeeView', {
-            title: 'edit', data})
+            title: 'Edit an Employee', data})
     }
     
 };
