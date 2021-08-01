@@ -65,7 +65,7 @@ function incomeTax($taxableIncome, $status) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HW4 Part2 - LastName</title>
+    <title>HW4 Part2 - Teeters</title>
 
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
@@ -108,19 +108,18 @@ function incomeTax($taxableIncome, $status) {
 
             echo "<tr><td>Filing Single</td><td>";
             echo "$" .number_format(incomeTax($taxableIncome, 'Single'), 2);
-           
             "</td></tr>";
+
             echo "<tr><td>Married Filing Jointly</td><td>";
             echo "$" .number_format(incomeTax($taxableIncome, 'Married_Jointly'), 2);
-           
             "</td></tr>";
+
             echo "<tr><td>Married Filing Separately</td><td>";
             echo "$" .number_format(incomeTax($taxableIncome, 'Married_Separately'), 2);
-           
             "</td></tr>";
+
             echo "<tr><td>Head of Household</td><td>";
             echo "$" .number_format(incomeTax($taxableIncome, 'Head_Household'), 2);
-           
             "</td></tr>";
 
             echo "</table>";
@@ -135,10 +134,8 @@ function incomeTax($taxableIncome, $status) {
     <br><br>
 
     <?php
-
       // Fill in the code for Tax Tables display
 
-     
       // print out the tax table 
 				foreach(TAX_RATES as $index => $taxArray) {
 

@@ -1,7 +1,9 @@
 <?php
 
 // Fill in the code for the following four functions
-$taxableIncome = (double)filter_input(INPUT_POST, 'netIncome', FILTER_SANITIZE_NUMBER_FLOAT);
+
+//gets input and assigns it to $taxableIncome
+$taxableIncome = filter_input(INPUT_POST, 'netIncome');
 
 function incomeTaxSingle($taxableIncome) {
     $incTax = 0.0;
@@ -116,13 +118,6 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
 }
 
 
-    $incomeTaxSingle =  '$'.number_format(incomeTaxSingle($taxableIncome));
-    $incomeTaxMarriedJointly = '$'.number_format(incomeTaxMarriedJointly($taxableIncome, 2));
-    $incomeTaxMarriedSeparately = '$'.number_format(incomeTaxMarriedSeparately($taxableIncome, 2));
-    $incomeTaxHeadOfHousehold = '$'.number_format(incomeTaxHeadOfHousehold($taxableIncome, 2));
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -164,26 +159,37 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
         // Fill in the rest of the PHP code for form submission results
 
         if(isset($_POST['netIncome'])) {
-            
-            echo "With a net taxable income of $".number_format($taxableIncome);
-            echo "<table class=table table-striped>>";
+            //creating and printing table with data to screen
+   
+            echo "With a net taxable income of $" .number_format($taxableIncome, 2);
+            echo "<br><br><br>";
+
+            echo "<table class=table table-striped>";
 
             echo "<tr><th>Status</th><th>Tax</th></tr>";
 
-            echo "<tr><td>Filing Single</td><td>$incomeTaxSingle</td></tr>";
-            echo "<tr><td>Married Filing Jointly </td><td>$incomeTaxMarriedJointly</td></tr>";
-            echo "<tr><td>Married Filling Separetely</td><td>$incomeTaxMarriedSeparately</td></tr>";
-            echo "<tr><td>Head of Household </td><td>$incomeTaxHeadOfHousehold</td></tr>";
+            echo "<tr><td>Filing Single</td><td>";
+            echo "$" .number_format(incomeTaxSingle($taxableIncome), 2);
+            "</td></tr>";
+
+            echo "<tr><td>Married Filing Jointly</td><td>";
+            echo "$" .number_format(incomeTaxMarriedJointly($taxableIncome), 2);
+            "</td></tr>";
+
+            echo "<tr><td>Married Filing Separately</td><td>";
+            echo "$" .number_format(incomeTaxMarriedSeparately($taxableIncome), 2);
+            "</td></tr>";
+
+            echo "<tr><td>Head of Household</td><td>";
+            echo "$" .number_format(incomeTaxHeadOfHousehold($taxableIncome), 2);
+            "</td></tr>";
 
             echo "</table>";
             
         };
 
-      
-
     ?>
 
 </div>
-
 </body>
 </html>
