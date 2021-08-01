@@ -26,6 +26,7 @@ define('TAX_RATES',
 );
 
 // Fill in the code for the following function
+$taxableIncome = (double)filter_input(INPUT_POST, 'netIncome', FILTER_SANITIZE_NUMBER_FLOAT);
 
 function incomeTax($taxableIncome, $status) {
     $incTax = 0.0;
@@ -99,17 +100,39 @@ function incomeTax($taxableIncome, $status) {
 
         if(isset($_POST['netIncome'])) {
 
-            echo "Results...";
+            echo "With a net taxable income of $" .number_format($taxableIncome, 2);
 
+            echo "<table>";
 
+            echo "<tr><th>Status</th><th>Tax</th></tr>";
+
+            echo "<tr><td>Filing Single</td><td>";
+            echo "$" .number_format(incomeTax($taxableIncome, 'Single'), 2);
+           
+            "</td></tr>";
+            echo "<tr><td>Married Filing Jointly</td><td>";
+            echo "$" .number_format(incomeTax($taxableIncome, 'Married_Jointly'), 2);
+           
+            "</td></tr>";
+            echo "<tr><td>Married Filing Separately</td><td>";
+            echo "$" .number_format(incomeTax($taxableIncome, 'Married_Separately'), 2);
+           
+            "</td></tr>";
+            echo "<tr><td>Head of Household</td><td>";
+            echo "$" .number_format(incomeTax($taxableIncome, 'Head_Household'), 2);
+           
+            "</td></tr>";
+
+            echo "</table>";
 
         }
 
     ?>
 
     
-
+    <br><br>
     <h3>2019 Tax Tables</h3>
+    <br><br>
 
     <?php
 
