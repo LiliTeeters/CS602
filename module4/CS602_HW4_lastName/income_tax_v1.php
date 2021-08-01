@@ -166,7 +166,7 @@ function incomeTaxHeadOfHousehold($taxableIncome) {
         if(isset($_POST['netIncome'])) {
             
             echo "With a net taxable income of $".number_format($taxableIncome);
-            echo "<table>";
+            echo "<table class=table table-striped>>";
 
             echo "<tr><th>Status</th><th>Tax</th></tr>";
 
