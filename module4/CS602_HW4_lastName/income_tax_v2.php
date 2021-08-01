@@ -28,10 +28,31 @@ define('TAX_RATES',
 // Fill in the code for the following function
 
 function incomeTax($taxableIncome, $status) {
-
     $incTax = 0.0;
+    $rates = TAX_RATES[$status]['Rates'];
+    $ranges = TAX_RATES[$status]['Ranges'];
+		$minTax = TAX_RATES[$status]['MinTax'];
 
-    
+    $maxIndex = max(array_keys($ranges));
+
+    foreach ($ranges as $index => $range) {
+
+      // if taxableIncome is greater than the maximum range value  
+      if($taxableIncome > $ranges[$maxIndex]) {								
+        // convert the rate at the max index to a decimal
+        $rateDecimal = $rates[$maxIndex] / 100;
+        // determine taxes owed
+        $incTax = (($taxableIncome - $ranges[$maxIndex]) * $rateDecimal) + $minTax[$maxIndex]; 
+        break;
+      }
+
+      // if taxableIncome falls within the ranges in the array
+      elseif(($taxableIncome <= $range) and ($taxableIncome > $ranges[$index - 1])) {									
+        $rateDecimal = $rates[$index - 1] / 100; // convert to decimal
+        $incTax =  (($taxableIncome - $ranges[$index]) * $rateDecimal) + $minTax[$index];
+        break;
+      }   
+    }     
     return $incTax;
 }
 
@@ -94,7 +115,71 @@ function incomeTax($taxableIncome, $status) {
 
       // Fill in the code for Tax Tables display
 
-      echo "Tax Tables...";
+     
+      // print out the tax table 
+				foreach(TAX_RATES as $index => $taxArray) {
+
+					// print the filing status headers
+					echo "<strong>" .$index ."</strong>";
+
+					// create the table
+					echo '<table class="table table-striped">
+										<thead class="table-success">
+											<tr>
+												<th scope="col">Taxable Income</th>
+												<th scope="col">Tax Rate</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td scope="row">';		
+													// print first row only						
+													echo "$" .number_format(TAX_RATES[$index]['Ranges'][0]);
+													echo " - $" .number_format(TAX_RATES[$index]['Ranges'][1]);
+									echo '</td>
+												<td>';
+													echo TAX_RATES[$index]['Rates'][0] ."%";
+									echo '</td>
+											</tr>';
+
+									// count the number of array elements 
+									$loopCount = count(TAX_RATES[$index]['Ranges']);		
+									// get the highest index position in the array
+									$maxTaxIndex = max(array_keys(TAX_RATES[$index]['Rates']));
+
+									// loop to print the remaining rows, except the last row			
+									// start loop at 1 to skip first row, use -1 with $loopCount to skip last row
+									for($i=1; $i < ($loopCount - 1); $i++) {
+								
+											echo '<tr>
+															<td scope="row">';								
+																echo "$" .number_format((TAX_RATES[$index]['Ranges'][$i])+1);
+																echo " - $" .number_format(TAX_RATES[$index]['Ranges'][$i + 1]);
+											echo  '</td>
+															<td>';
+																echo "$" .number_format(TAX_RATES[$index]['MinTax'][$i], 2) ." plus ";
+																echo TAX_RATES[$index]['Rates'][$i] ."% of the amount over ";
+																echo "$" .number_format(TAX_RATES[$index]['Ranges'][$i]);
+											echo  '</td>
+														</tr>';
+										}
+
+										// print the last array element row that was left out of the for loop
+										echo '<tr>
+														<td scope="row">';		
+															// print last row 						
+															echo "$" .number_format((TAX_RATES[$index]['Ranges'][$maxTaxIndex]) + 1);
+															echo " or more"; 
+											echo '</td>
+														<td>';
+															echo "$" .number_format(TAX_RATES[$index]['MinTax'][$maxTaxIndex], 2) ." plus ";
+															echo TAX_RATES[$index]['Rates'][$maxTaxIndex] ."% of the amount over ";
+															echo "$" .number_format(TAX_RATES[$index]['Ranges'][$maxTaxIndex]);		
+											echo '</td>
+													</tr>															
+								  </tbody>
+							  </table> ';
+							}
 
     ?>
 
